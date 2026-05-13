@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deutsch A2 — Master Learning Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg:       #0d0f14;
+  --surface:  #13161e;
+  --panel:    #181c26;
+  --border:   #252a38;
+  --border2:  #2e3450;
+  --text:     #dde2f0;
+  --muted:    #6b7490;
+  --faint:    #2a3048;
+
+  --gold:     #e8b84b;
+  --gold-bg:  rgba(232,184,75,.10);
+  --blue:     #5b8fff;
+  --blue-bg:  rgba(91,143,255,.10);
+  --green:    #4dcf80;
+  --green-bg: rgba(77,207,128,.10);
+  --red:      #f06060;
+  --red-bg:   rgba(240,96,96,.10);
+  --purple:   #a87eff;
+  --purple-bg:rgba(168,126,255,.10);
+  --teal:     #40d0c8;
+  --teal-bg:  rgba(64,208,200,.10);
+
+  --r: 12px;
+  --r-sm: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+/* ── TYPOGRAPHY ─────────────────── */
+h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+code, .mono  { font-family: 'IBM Plex Mono', monospace; font-size: 0.88em; }
+
+/* ── HEADER ─────────────────────── */
+.site-header {
+  background: linear-gradient(160deg, #151a2d 0%, #0d0f14 55%);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 28px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(91,143,255,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 80% 20%, rgba(232,184,75,.06) 0%, transparent 60%);
+}
+.site-header .kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.site-header h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  font-style: italic;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.site-header h1 em { color: var(--gold); font-style: normal; }
+.site-header .sub {
+  color: var(--muted);
+  font-size: 0.88rem;
+  max-width: 480px;
+  margin: 0 auto 18px;
+}
+
+/* Progress bar across top */
+.progress-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  font-size: 0.83rem;
+}
+.progress-banner .label { color: var(--muted); white-space: nowrap; }
+.progress-banner .bar-wrap {
+  flex: 1;
+  background: var(--border);
+  border-radius: 999px;
+  height: 7px;
+}
+.progress-banner .bar-fill {
+  background: linear-gradient(90deg, var(--blue), var(--green));
+  height: 7px;
+  border-radius: 999px;
+  transition: width .5s ease;
+  width: 0%;
+}
+.progress-banner .pct { color: var(--green); font-family: 'IBM Plex Mono', monospace; font-weight: 500; white-space: nowrap; }
+
+/* ── SIDEBAR + LAYOUT ────────────── */
+.app-wrap {
+  display: flex;
+  min-height: calc(100vh - 180px);
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.sidebar-section {
+  padding: 6px 16px 2px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  cursor: pointer;
+  font-size: 0.84rem;
+  color: var(--muted);
+  transition: all .18s;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+}
+.sidebar-link:hover { background: var(--panel); color: var(--text); }
+.sidebar-link.active { background: var(--panel); color: #fff; border-left-color: var(--gold); }
+.sidebar-link .icon { font-size: 1rem; flex-shrink: 0; }
+.sidebar-link .check-dot {
+  margin-left: auto;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border2);
+  flex-shrink: 0;
+  transition: background .3s;
+}
+.sidebar-link .check-dot.done { background: var(--green); }
+
+.content {
+  flex: 1;
+  padding: 32px 28px 80px;
+  max-width: 820px;
+}
+
+@media (max-width: 680px) {
+  .app-wrap { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: relative; }
+  .content { padding: 20px 16px 60px; }
+}
+
+/* ── SECTIONS ────────────────────── */
+.page { display: none; animation: fadeIn .25s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ── TOPIC CARD ──────────────────── */
+.topic-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 24px 26px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.topic-card.gold-card  { border-color: rgba(232,184,75,.3); }
+.topic-card.blue-card  { border-color: rgba(91,143,255,.3); }
+.topic-card.green-card { border-color: rgba(77,207,128,.3); }
+.topic-card.purple-card{ border-color: rgba(168,126,255,.3); }
+.topic-card.teal-card  { border-color: rgba(64,208,200,.3); }
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card-sub {
+  color: var(--muted);
+  font-size: 0.83rem;
+  margin-bottom: 18px;
+}
+
+/* colour accents */
+.c-gold   { color: var(--gold); }
+.c-blue   { color: var(--blue); }
+.c-green  { color: var(--green); }
+.c-red    { color: var(--red); }
+.c-purple { color: var(--purple); }
+.c-teal   { color: var(--teal); }
+
+/* ── TICK CHECKBOX ───────────────── */
+.tick-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+  user-select: none;
+}
+.tick-row:hover { border-color: var(--border2); background: var(--faint); }
+.tick-row.ticked { background: var(--green-bg); border-color: rgba(77,207,128,.4); }
+
+.tick-box {
+  width: 22px; height: 22px;
+  border: 2px solid var(--border2);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all .2s;
+  font-size: 0;
+}
+.tick-row.ticked .tick-box {
+  background: var(--green);
+  border-color: var(--green);
+  font-size: 13px;
+  color: #0d0f14;
+  font-weight: 700;
+}
+.tick-content { flex: 1; }
+.tick-content .rule { font-weight: 500; font-size: 0.9rem; }
+.tick-content .rule-detail { color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+.tick-content .rule-example {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--gold);
+  margin-top: 5px;
+  padding: 4px 10px;
+  background: var(--gold-bg);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* ── TABLES ──────────────────────── */
+.t-wrap { overflow-x: auto; margin: 14px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+th {
+  background: var(--panel);
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 9px 13px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+td {
+  padding: 8px 13px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--faint); }
+
+/* coloured cells */
+.cell-green { color: var(--green); font-weight: 600; }
+.cell-gold  { color: var(--gold);  font-weight: 600; }
+.cell-blue  { color: var(--blue);  font-weight: 600; }
+.cell-red   { color: var(--red);   font-weight: 600; }
+.cell-teal  { color: var(--teal);  font-weight: 600; }
+
+/* ── FORMULA BOX ─────────────────── */
+.formula {
+  background: var(--panel);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-sm);
+  padding: 14px 20px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-style: italic;
+  margin: 14px 0;
+  letter-spacing: .01em;
+}
+
+/* ── EXAMPLE BOX ─────────────────── */
+.ex {
+  border-left: 3px solid var(--border2);
+  padding: 9px 14px;
+  margin: 7px 0;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: var(--panel);
+  font-size: 0.9rem;
+}
+.ex .de { font-weight: 500; color: var(--text); }
+.ex .en { color: var(--muted); font-style: italic; font-size: 0.82rem; margin-top: 2px; }
+.ex.gold-ex { border-left-color: var(--gold); }
+.ex.blue-ex { border-left-color: var(--blue); }
+.ex.green-ex { border-left-color: var(--green); }
+.ex.purple-ex { border-left-color: var(--purple); }
+.ex.teal-ex  { border-left-color: var(--teal); }
+
+/* ── NOTE BOXES ──────────────────── */
+.note {
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  font-size: 0.86rem;
+  margin: 12px 0;
+  display: flex;
+  gap: 10px;
+}
+.note-icon { flex-shrink: 0; font-size: 1rem; }
+.note.tip  { background: var(--green-bg); border: 1px solid rgba(77,207,128,.25); }
+.note.warn { background: var(--red-bg);   border: 1px solid rgba(240,96,96,.25); }
+.note.info { background: var(--blue-bg);  border: 1px solid rgba(91,143,255,.25); }
+.note.gold { background: var(--gold-bg);  border: 1px solid rgba(232,184,75,.25); }
+
+/* ── VOCAB GRID ──────────────────── */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+.v-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 13px;
+  transition: border-color .2s;
+}
+.v-card:hover { border-color: var(--border2); }
+.v-art { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 2px; }
+.v-art.m { color: var(--blue); }
+.v-art.f { color: #f06090; }
+.v-art.n { color: var(--green); }
+.v-art.pl { color: var(--purple); }
+.v-de { font-weight: 600; font-size: 0.92rem; }
+.v-en { color: var(--muted); font-size: 0.79rem; }
+
+/* ── TWO COL ─────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+@media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+.mini-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+}
+.mini-panel h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+/* ── SECTION TITLE ───────────────── */
+.page-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+.page-title .icon { font-size: 2.4rem; line-height: 1; margin-top: 2px; }
+.page-title h2 { font-size: 1.8rem; font-weight: 900; }
+.page-title p  { color: var(--muted); font-size: 0.86rem; margin-top: 4px; }
+
+/* ── TAG ─────────────────────────── */
+.tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.tag-reg    { background: var(--green-bg); color: var(--green); border: 1px solid rgba(77,207,128,.3); }
+.tag-irr    { background: var(--gold-bg);  color: var(--gold);  border: 1px solid rgba(232,184,75,.3); }
+.tag-worm   { background: var(--teal-bg);  color: var(--teal);  border: 1px solid rgba(64,208,200,.3); }
+.tag-haben  { background: var(--blue-bg);  color: var(--blue);  border: 1px solid rgba(91,143,255,.3); }
+.tag-sein   { background: var(--purple-bg);color: var(--purple);border: 1px solid rgba(168,126,255,.3); }
+
+/* ── PILL ROW ────────────────────── */
+.pill-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 10px 0; }
+.pill {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 13px;
+  font-size: 0.82rem;
+  color: var(--text);
+}
+
+/* ── DIALOGUE ────────────────────── */
+.dialogue {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 16px 18px;
+  margin: 14px 0;
+}
+.d-line { display: flex; gap: 10px; margin: 6px 0; font-size: 0.88rem; }
+.d-speaker { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: .06em; text-transform: uppercase; min-width: 55px; padding-top: 3px; flex-shrink: 0; }
+.d-speaker.A { color: var(--gold); }
+.d-speaker.B { color: var(--blue); }
+
+/* ── HR ──────────────────────────── */
+hr { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+/* ── QUIZ EXERCISES ──────────────── */
+.quiz-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+.quiz-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.q-num {
+  background: var(--gold);
+  color: var(--bg);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 500;
+  font-size: 0.78rem;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.q-title { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 0.98rem; }
+.q-inst  { font-size: 0.79rem; color: var(--muted); }
+
+.q-line { margin: 10px 0; font-size: 0.9rem; line-height: 2; }
+.blank {
+  display: inline-block;
+  border: none;
+  border-bottom: 2px solid var(--border2);
+  background: transparent;
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.9rem;
+  width: 130px;
+  padding: 0 6px;
+  outline: none;
+  transition: border-color .2s;
+  text-align: center;
+}
+.blank:focus { border-bottom-color: var(--gold); }
+.blank.ok  { border-bottom-color: var(--green); background: var(--green-bg); color: var(--green); font-weight: 600; border-radius: 4px 4px 0 0; }
+.blank.err { border-bottom-color: var(--red);   background: var(--red-bg);   color: var(--red); }
+
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.btn {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: none;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.btn:hover { opacity: .8; }
+.btn-primary { background: var(--gold); color: var(--bg); }
+.btn-ghost   { background: transparent; color: var(--muted); border: 1px solid var(--border2); }
+
+.ans-reveal {
+  display: none;
+  background: var(--green-bg);
+  border: 1px solid rgba(77,207,128,.3);
+  border-radius: var(--r-sm);
+  padding: 12px 16px;
+  font-size: 0.86rem;
+  margin-top: 12px;
+  line-height: 2;
+}
+.ans-reveal strong { color: var(--green); }
+
+/* match game */
+.match-area { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+.m-tile {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 0.87rem;
+  cursor: pointer;
+  transition: all .18s;
+  user-select: none;
+}
+.m-tile:hover  { border-color: var(--border2); }
+.m-tile.sel    { border-color: var(--gold); background: var(--gold-bg); }
+.m-tile.right  { border-color: var(--green); background: var(--green-bg); color: var(--green); font-weight: 600; cursor: default; }
+.m-tile.wrong  { border-color: var(--red); background: var(--red-bg); animation: shake .3s; }
+.match-score { font-family: 'IBM Plex Mono', monospace; color: var(--green); font-size: 0.85rem; margin-bottom: 8px; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 30%{transform:translateX(-5px)} 70%{transform:translateX(5px)} }
+
+/* ── DIALOGUE BUILDER ────────────── */
+.d-choice { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.d-opt {
+  background: var(--panel);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: all .18s;
+}
+.d-opt:hover { border-color: var(--gold); }
+.d-opt.selected-ok  { background: var(--green-bg); border-color: var(--green); color: var(--green); font-weight: 600; }
+.d-opt.selected-err { background: var(--red-bg);   border-color: var(--red);   color: var(--red); }
+
+/* ── CONJUGATION TABLE COLOURS ───── */
+.conj-table .ich-row td:first-child { color: var(--blue); }
+
+/* ── SCROLL TOP ──────────────────── */
+#scroll-top {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  background: var(--gold);
+  color: var(--bg);
+  border: none;
+  border-radius: 50%;
+  width: 42px; height: 42px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+  z-index: 200;
+  transition: opacity .2s;
+}
+#scroll-top.show { display: flex; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="kicker">IEB Grade 9 · Gute Idee A2 · Lektionen 13 + 14</div>
+  <h1>Deutsch <em>Meisterkurs</em></h1>
+  <p class="sub">Every grammar rule, all vocabulary, and full explanations — tick each topic as you understand it.</p>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="progress-banner">
+  <span class="label">Overall mastery</span>
+  <div class="bar-wrap"><div class="bar-fill" id="bar-fill"></div></div>
+  <span class="pct" id="pct-label">0 / 0 topics</span>
+</div>
+
+<div class="app-wrap">
+
+<!-- SIDEBAR NAV -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-section">Lektion 13</div>
+  <a class="sidebar-link active" data-page="l13-vocab" onclick="go(this)"><span class="icon">🛍️</span>Shopping Vocab<span class="check-dot" id="dot-l13-vocab"></span></a>
+  <a class="sidebar-link" data-page="l13-komparativ" onclick="go(this)"><span class="icon">📊</span>Komparativ<span class="check-dot" id="dot-l13-komparativ"></span></a>
+  <a class="sidebar-link" data-page="l13-superlativ" onclick="go(this)"><span class="icon">🏆</span>Superlativ<span class="check-dot" id="dot-l13-superlativ"></span></a>
+  <a class="sidebar-link" data-page="l13-vergleiche" onclick="go(this)"><span class="icon">⚖️</span>Vergleiche<span class="check-dot" id="dot-l13-vergleiche"></span></a>
+  <a class="sidebar-link" data-page="l13-hoflich" onclick="go(this)"><span class="icon">🤝</span>Höfliche Fragen<span class="check-dot" id="dot-l13-hoflich"></span></a>
+  <a class="sidebar-link" data-page="l13-dieser" onclick="go(this)"><span class="icon">👆</span>Dieser / Diese / Dieses<span class="check-dot" id="dot-l13-dieser"></span></a>
+  <a class="sidebar-link" data-page="l13-shop-phrases" onclick="go(this)"><span class="icon">🗣️</span>Im Geschäft<span class="check-dot" id="dot-l13-shop-phrases"></span></a>
+
+  <div class="sidebar-section">Lektion 14</div>
+  <a class="sidebar-link" data-page="l14-vocab" onclick="go(this)"><span class="icon">✈️</span>Travel Vocab<span class="check-dot" id="dot-l14-vocab"></span></a>
+  <a class="sidebar-link" data-page="l14-partizip" onclick="go(this)"><span class="icon">🔧</span>Partizip II<span class="check-dot" id="dot-l14-partizip"></span></a>
+  <a class="sidebar-link" data-page="l14-perfekt" onclick="go(this)"><span class="icon">⏮️</span>Das Perfekt<span class="check-dot" id="dot-l14-perfekt"></span></a>
+  <a class="sidebar-link" data-page="l14-haben-sein" onclick="go(this)"><span class="icon">🚶</span>haben vs sein<span class="check-dot" id="dot-l14-haben-sein"></span></a>
+  <a class="sidebar-link" data-page="l14-wormy" onclick="go(this)"><span class="icon">🪱</span>Wormy Verbs<span class="check-dot" id="dot-l14-wormy"></span></a>
+
+  <div class="sidebar-section">Grammar Reference</div>
+  <a class="sidebar-link" data-page="ref-praesens" onclick="go(this)"><span class="icon">🕐</span>Präsens Endings<span class="check-dot" id="dot-ref-praesens"></span></a>
+  <a class="sidebar-link" data-page="ref-verbs" onclick="go(this)"><span class="icon">📚</span>All Verbs + Meanings<span class="check-dot" id="dot-ref-verbs"></span></a>
+
+  <div class="sidebar-section">Exercises</div>
+  <a class="sidebar-link" data-page="ex-komparativ" onclick="go(this)"><span class="icon">✏️</span>Practise Comparisons<span class="check-dot" id="dot-ex-komparativ"></span></a>
+  <a class="sidebar-link" data-page="ex-perfekt" onclick="go(this)"><span class="icon">✏️</span>Practise Perfekt<span class="check-dot" id="dot-ex-perfekt"></span></a>
+  <a class="sidebar-link" data-page="ex-vocab" onclick="go(this)"><span class="icon">🎮</span>Vocab Match Game<span class="check-dot" id="dot-ex-vocab"></span></a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+
+<!-- ════════════════════════════════════════
+     LEKTION 13 — SHOPPING VOCAB
+═════════════════════════════════════════ -->
+<div class="page active" id="page-l13-vocab">
+  <div class="page-title">
+    <div class="icon">🛍️</div>
+    <div>
+      <h2 class="c-gold">Shopping & Clothes Vocabulary</h2>
+      <p>Lektion 13 — Das muss ich haben!</p>
+    </div>
+  </div>
+
+  <p style="margin-bottom:16px">Tick each topic below as you feel confident with it. The green dot in the sidebar will light up when you've ticked everything on a page.</p>
+
+  <!-- TICK TOPICS -->
+  <div class="tick-row" onclick="tick(this,'l13-vocab')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I know the article (der/die/das) for each item of clothing</div>
+      <div class="rule-detail">Blue = der (m) · Pink = die (f) · Green = das (n)</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-vocab')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I know the adjectives used to describe clothing</div>
+      <div class="rule-example">teuer · billig · modern · bequem · eng · weit</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-vocab')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I know shopping nouns (Kasse, Größe, Preis, Rabatt, Angebot)</div>
+      <div class="rule-detail">Checkout · size · price · discount · deal/offer</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">👗 Kleidung (Clothing)</div>
+    <div class="card-sub">Article colour: <span style="color:var(--blue)">■ der</span> &nbsp;<span style="color:#f06090">■ die</span> &nbsp;<span style="color:var(--green)">■ das</span></div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Pullover</div><div class="v-en">pullover / sweater</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Rock</div><div class="v-en">skirt</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Schuh (pl. Schuhe)</div><div class="v-en">shoe / shoes</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Mantel</div><div class="v-en">coat</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Gürtel</div><div class="v-en">belt</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Stiefel (pl.)</div><div class="v-en">boots</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Jacke</div><div class="v-en">jacket</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Hose</div><div class="v-en">trousers / pants</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Bluse</div><div class="v-en">blouse</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Jeans</div><div class="v-en">jeans</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Mütze</div><div class="v-en">beanie / hat</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Krawatte</div><div class="v-en">tie</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Socken (pl.)</div><div class="v-en">socks</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Hemd</div><div class="v-en">button-up shirt</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Kleid</div><div class="v-en">dress</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">T-Shirt</div><div class="v-en">T-shirt</div></div>
+    </div>
+  </div>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">🏪 Im Geschäft (In the shop) — Nouns</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Größe</div><div class="v-en">size</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Preis</div><div class="v-en">price</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Rabatt</div><div class="v-en">discount</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Angebot</div><div class="v-en">deal / offer / on sale</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Kasse</div><div class="v-en">checkout / cashier</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Kaufhaus</div><div class="v-en">department store</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Umkleidekabine</div><div class="v-en">changing room / fitting room</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Quittung</div><div class="v-en">receipt</div></div>
+    </div>
+
+    <h4 style="margin-top:16px; color:var(--muted); font-size:.8rem; letter-spacing:.06em; text-transform:uppercase">Clothing adjectives</h4>
+    <div class="pill-row">
+      <span class="pill">teuer — expensive</span><span class="pill">billig — cheap</span>
+      <span class="pill">modern — modern</span><span class="pill">altmodisch — old-fashioned</span>
+      <span class="pill">eng — tight</span><span class="pill">weit — loose / wide</span>
+      <span class="pill">lang — long</span><span class="pill">kurz — short</span>
+      <span class="pill">bequem — comfortable</span><span class="pill">praktisch — practical</span>
+      <span class="pill">schön — beautiful</span><span class="pill">hässlich — ugly</span>
+      <span class="pill">schick — stylish</span><span class="pill">lässig — casual</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     LEKTION 13 — KOMPARATIV
+═════════════════════════════════════════ -->
+<div class="page" id="page-l13-komparativ">
+  <div class="page-title">
+    <div class="icon">📊</div>
+    <div><h2 class="c-gold">Komparativ — "more / -er"</h2><p>Lektion 13 grammar — how to say something is bigger, cheaper, faster…</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l13-komparativ')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Regular rule: adjective + <strong>-er</strong></div>
+      <div class="rule-example">klein → kleiner &nbsp;|&nbsp; schnell → schneller &nbsp;|&nbsp; billig → billiger</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-komparativ')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Umlaut group: short adjectives with a/o/u get an umlaut (ä/ö/ü)</div>
+      <div class="rule-example">alt→älter · jung→jünger · groß→größer · warm→wärmer · kalt→kälter · lang→länger · kurz→kürzer</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-komparativ')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Irregular Komparativ — must memorise!</div>
+      <div class="rule-example">gut → besser &nbsp;|&nbsp; viel → mehr &nbsp;|&nbsp; gern → lieber &nbsp;|&nbsp; hoch → höher &nbsp;|&nbsp; nah → näher</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">The Komparativ Rule</div>
+    <div class="card-sub">Step up from "small" to "smaller"</div>
+    <div class="formula">adjective + <span class="c-gold">-er</span> + als</div>
+
+    <div class="note tip"><div class="note-icon">💡</div><div>Most adjectives just need <strong>-er</strong> added. That's it! Think: small → smaller, fast → faster — same idea in German.</div></div>
+
+    <div class="t-wrap">
+      <table>
+        <tr><th>Grundform</th><th>Meaning</th><th>Komparativ</th><th>Type</th></tr>
+        <tr><td>klein</td><td>small</td><td class="cell-green">kleiner</td><td>regular</td></tr>
+        <tr><td>schnell</td><td>fast</td><td class="cell-green">schneller</td><td>regular</td></tr>
+        <tr><td>billig</td><td>cheap</td><td class="cell-green">billiger</td><td>regular</td></tr>
+        <tr><td>schön</td><td>beautiful</td><td class="cell-green">schöner</td><td>regular</td></tr>
+        <tr><td>teuer</td><td>expensive</td><td class="cell-green">teurer</td><td>regular (drops -e)</td></tr>
+        <tr><td>dunkel</td><td>dark</td><td class="cell-green">dunkler</td><td>regular (drops -e)</td></tr>
+        <tr><td>alt</td><td>old</td><td class="cell-gold">älter</td><td>Umlaut ✦</td></tr>
+        <tr><td>jung</td><td>young</td><td class="cell-gold">jünger</td><td>Umlaut ✦</td></tr>
+        <tr><td>groß</td><td>big / tall</td><td class="cell-gold">größer</td><td>Umlaut ✦</td></tr>
+        <tr><td>warm</td><td>warm</td><td class="cell-gold">wärmer</td><td>Umlaut ✦</td></tr>
+        <tr><td>kalt</td><td>cold</td><td class="cell-gold">kälter</td><td>Umlaut ✦</td></tr>
+        <tr><td>lang</td><td>long</td><td class="cell-gold">länger</td><td>Umlaut ✦</td></tr>
+        <tr><td>kurz</td><td>short</td><td class="cell-gold">kürzer</td><td>Umlaut ✦</td></tr>
+        <tr><td>gut</td><td>good</td><td class="cell-red">besser</td><td>irregular ★</td></tr>
+        <tr><td>viel</td><td>much/many</td><td class="cell-red">mehr</td><td>irregular ★</td></tr>
+        <tr><td>gern</td><td>like to</td><td class="cell-red">lieber</td><td>irregular ★</td></tr>
+        <tr><td>hoch</td><td>high</td><td class="cell-red">höher</td><td>irregular ★</td></tr>
+        <tr><td>nah</td><td>near</td><td class="cell-red">näher</td><td>irregular ★</td></tr>
+      </table>
+    </div>
+
+    <div class="note warn"><div class="note-icon">⚠️</div><div><strong>teuer</strong> drops an -e: teuer → <strong>teurer</strong> (not ~~teurerer~~). <strong>dunkel</strong> also drops: dunkel → <strong>dunkler</strong>.</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     LEKTION 13 — SUPERLATIV
+═════════════════════════════════════════ -->
+<div class="page" id="page-l13-superlativ">
+  <div class="page-title">
+    <div class="icon">🏆</div>
+    <div><h2 class="c-gold">Superlativ — "the most / -est"</h2><p>The highest level of comparison — the biggest, the cheapest, the best.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l13-superlativ')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Rule: <strong>am</strong> + adjective + <strong>-sten</strong> (or -esten)</div>
+      <div class="rule-example">klein → am kleinsten &nbsp;|&nbsp; schnell → am schnellsten</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-superlativ')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Add <strong>-esten</strong> (not just -sten) when stem ends in -t, -d, -s, -ß, -z</div>
+      <div class="rule-example">kalt → am kält<strong>esten</strong> &nbsp;|&nbsp; kurz → am kürz<strong>esten</strong></div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-superlativ')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Irregular Superlative — same 5 to memorise</div>
+      <div class="rule-example">gut→am besten · viel→am meisten · gern→am liebsten · hoch→am höchsten · nah→am nächsten</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">The Superlativ Rule</div>
+    <div class="formula"><span class="c-blue">am</span> + adjective + <span class="c-gold">-sten</span></div>
+
+    <div class="note tip"><div class="note-icon">💡</div><div>Think of <strong>am</strong> as "the most". Then add -sten to the adjective. The umlaut group still gets umlauts in the superlative too!</div></div>
+
+    <div class="t-wrap">
+      <table>
+        <tr><th>Grundform</th><th>Komparativ</th><th>Superlativ</th></tr>
+        <tr><td>klein</td><td class="cell-green">kleiner</td><td class="cell-green">am kleinsten</td></tr>
+        <tr><td>schnell</td><td class="cell-green">schneller</td><td class="cell-green">am schnellsten</td></tr>
+        <tr><td>billig</td><td class="cell-green">billiger</td><td class="cell-green">am billigsten</td></tr>
+        <tr><td>schön</td><td class="cell-green">schöner</td><td class="cell-green">am schönsten</td></tr>
+        <tr><td>teuer</td><td class="cell-green">teurer</td><td class="cell-green">am teuersten</td></tr>
+        <tr><td>alt</td><td class="cell-gold">älter</td><td class="cell-gold">am ältesten</td></tr>
+        <tr><td>jung</td><td class="cell-gold">jünger</td><td class="cell-gold">am jüngsten</td></tr>
+        <tr><td>groß</td><td class="cell-gold">größer</td><td class="cell-gold">am größten</td></tr>
+        <tr><td>warm</td><td class="cell-gold">wärmer</td><td class="cell-gold">am wärmsten</td></tr>
+        <tr><td>kalt</td><td class="cell-gold">kälter</td><td class="cell-gold">am kältesten</td></tr>
+        <tr><td>lang</td><td class="cell-gold">länger</td><td class="cell-gold">am längsten</td></tr>
+        <tr><td>kurz</td><td class="cell-gold">kürzer</td><td class="cell-gold">am kürzesten</td></tr>
+        <tr><td>gut</td><td class="cell-red">besser</td><td class="cell-red">am besten</td></tr>
+        <tr><td>viel</td><td class="cell-red">mehr</td><td class="cell-red">am meisten</td></tr>
+        <tr><td>gern</td><td class="cell-red">lieber</td><td class="cell-red">am liebsten</td></tr>
+        <tr><td>hoch</td><td class="cell-red">höher</td><td class="cell-red">am höchsten</td></tr>
+        <tr><td>nah</td><td class="cell-red">näher</td><td class="cell-red">am nächsten</td></tr>
+      </table>
+    </div>
+
+    <div class="note info"><div class="note-icon">📌</div><div>When an adjective comes <em>before</em> a noun (attributive use), the form changes: <strong>der beste Film</strong>, <strong>das größte Kaufhaus</strong> — you don't use "am" in that case.</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     LEKTION 13 — VERGLEICHE
+═════════════════════════════════════════ -->
+<div class="page" id="page-l13-vergleiche">
+  <div class="page-title">
+    <div class="icon">⚖️</div>
+    <div><h2 class="c-gold">Vergleiche — Comparison Sentences</h2><p>Putting comparisons into full sentences using so…wie and …als.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l13-vergleiche')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Equal: <strong>so + adjective + wie</strong> = "as … as"</div>
+      <div class="rule-example">Das Hemd ist so teuer wie die Hose. (The shirt is as expensive as the trousers.)</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-vergleiche')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Unequal: <strong>adjective + -er + als</strong> = "more … than / -er than"</div>
+      <div class="rule-example">Der Mantel ist teurer als die Jacke. (The coat is more expensive than the jacket.)</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-vergleiche')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Superlative: <strong>am + adjective + -sten</strong> = "the most… / the -est"</div>
+      <div class="rule-example">Diese Schuhe sind am teuersten. (These shoes are the most expensive.)</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">Equal — so … wie (as … as)</div>
+    <div class="formula"><span class="c-blue">so</span> + adjective + <span class="c-blue">wie</span></div>
+    <p style="font-size:.88rem; margin-bottom:10px">Use this when two things are <em>equal</em> — the same size, price, speed etc.</p>
+    <div class="ex gold-ex"><div class="de">Diese Jacke ist <span class="c-blue">so teuer wie</span> jene.</div><div class="en">This jacket is as expensive as that one.</div></div>
+    <div class="ex gold-ex"><div class="de">Ich bin <span class="c-blue">so groß wie</span> mein Bruder.</div><div class="en">I am as tall as my brother.</div></div>
+    <div class="ex gold-ex"><div class="de">Schwimmen ist <span class="c-blue">so gut wie</span> Laufen.</div><div class="en">Swimming is as good as running.</div></div>
+  </div>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">Unequal — …er als (more… than)</div>
+    <div class="formula">adjective + <span class="c-gold">-er</span> + <span class="c-gold">als</span></div>
+    <p style="font-size:.88rem; margin-bottom:10px">Use when one thing is <em>more</em> of a quality than the other.</p>
+    <div class="ex gold-ex"><div class="de">Der Pullover ist <span class="c-gold">teurer als</span> das T-Shirt.</div><div class="en">The pullover is more expensive than the T-shirt.</div></div>
+    <div class="ex gold-ex"><div class="de">Meine Schwester ist <span class="c-gold">jünger als</span> ich.</div><div class="en">My sister is younger than me.</div></div>
+    <div class="ex gold-ex"><div class="de">Das rote Kleid ist <span class="c-gold">schöner als</span> das blaue.</div><div class="en">The red dress is more beautiful than the blue one.</div></div>
+    <div class="note warn"><div class="note-icon">⚠️</div><div>Never mix them up! <strong>so…wie</strong> = equal (same). <strong>-er als</strong> = unequal (one is more). Memory trick: <em>"so same, -er different"</em>.</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     LEKTION 13 — HÖFLICHE FRAGEN
+═════════════════════════════════════════ -->
+<div class="page" id="page-l13-hoflich">
+  <div class="page-title">
+    <div class="icon">🤝</div>
+    <div><h2 class="c-gold">Höfliche Fragen — Polite Questions</h2><p>Using Konjunktiv II to be polite — in shops, with teachers, with adults.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l13-hoflich')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I understand why we use Konjunktiv II (it "softens" a request)</div>
+      <div class="rule-detail">Like saying "Can you…" vs "Could you please…" in English</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-hoflich')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I know the 5 polite forms: könnte · würde · möchte · dürfte · hätte</div>
+      <div class="rule-detail">could · would · would like · may · would have</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-hoflich')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I know when to use <strong>Sie</strong> (formal) vs <strong>du</strong> (informal)</div>
+      <div class="rule-detail">Sie = teachers, adults, strangers | du = friends, family, classmates</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-hoflich')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I can write a complete höfliche Frage using bitte + Konjunktiv II</div>
+      <div class="rule-example">Könnten Sie mir bitte helfen?</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">The 5 Polite Forms</div>
+    <div class="t-wrap"><table>
+      <tr><th>Normal verb</th><th>Polite form</th><th>Meaning</th><th>Example</th></tr>
+      <tr><td>können (can)</td><td class="cell-green">könnte(n)</td><td>could</td><td>Könnten Sie helfen?</td></tr>
+      <tr><td>werden (will)</td><td class="cell-green">würde(n)</td><td>would</td><td>Würden Sie das wiederholen?</td></tr>
+      <tr><td>mögen (like)</td><td class="cell-green">möchte(n)</td><td>would like</td><td>Ich möchte bitte…</td></tr>
+      <tr><td>dürfen (may)</td><td class="cell-green">dürfte(n)</td><td>may / might I</td><td>Dürfte ich das anprobieren?</td></tr>
+      <tr><td>haben (have)</td><td class="cell-green">hätte(n)</td><td>would have</td><td>Hätten Sie das in Blau?</td></tr>
+    </table></div>
+    <div class="note tip"><div class="note-icon">💡</div><div>Add <strong>(n)</strong> for formal Sie: <em>könnte</em> (du) → <em>könnten Sie</em>. The -n at the end signals formal.</div></div>
+  </div>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">Example Dialogues</div>
+    <div class="dialogue">
+      <div class="d-line"><span class="d-speaker A">Kunde:</span><span>Könnten Sie mir bitte helfen?</span></div>
+      <div class="d-line"><span class="d-speaker B">Verkäufer:</span><span>Natürlich! Gerne.</span></div>
+      <div class="d-line"><span class="d-speaker A">Kunde:</span><span>Ich möchte diesen Pullover in Größe 40.</span></div>
+      <div class="d-line"><span class="d-speaker B">Verkäufer:</span><span>Einen Moment bitte. Hätten Sie auch gern die Jacke dazu?</span></div>
+      <div class="d-line"><span class="d-speaker A">Kunde:</span><span>Dürfte ich die Jacke anprobieren?</span></div>
+      <div class="d-line"><span class="d-speaker B">Verkäufer:</span><span>Ja, die Umkleidekabine ist dort drüben.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DIESER / DIESE / DIESES
+═════════════════════════════════════════ -->
+<div class="page" id="page-l13-dieser">
+  <div class="page-title">
+    <div class="icon">👆</div>
+    <div><h2 class="c-gold">Dieser / Diese / Dieses — "This / These"</h2><p>Pointing to specific items — used constantly when shopping.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l13-dieser')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">dieser = masculine (der words) | diese = feminine (die words) | dieses = neuter (das words)</div>
+      <div class="rule-example">dieser Pullover · diese Jacke · dieses Hemd</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-dieser')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">In Akkusativ, masculine changes: dieser → <strong>diesen</strong></div>
+      <div class="rule-example">Ich kaufe <strong>diesen</strong> Pullover. (Akkusativ — object of the verb)</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">Declension Table</div>
+    <div class="t-wrap"><table>
+      <tr><th>Gender</th><th>Article</th><th>Nominativ</th><th>Akkusativ</th><th>Example</th></tr>
+      <tr><td>Maskulin</td><td>der</td><td class="cell-green">dies<strong>er</strong></td><td class="cell-gold">dies<strong>en</strong></td><td>dieser/diesen Pullover</td></tr>
+      <tr><td>Feminin</td><td>die</td><td class="cell-green">dies<strong>e</strong></td><td class="cell-green">dies<strong>e</strong></td><td>diese Jacke</td></tr>
+      <tr><td>Neutrum</td><td>das</td><td class="cell-green">dies<strong>es</strong></td><td class="cell-green">dies<strong>es</strong></td><td>dieses Hemd</td></tr>
+      <tr><td>Plural</td><td>die</td><td class="cell-green">dies<strong>e</strong></td><td class="cell-green">dies<strong>e</strong></td><td>diese Schuhe</td></tr>
+    </table></div>
+    <div class="note info"><div class="note-icon">📌</div><div>The endings of <strong>dieser</strong> copy the endings of <strong>der/die/das</strong> — so if you know the articles, you know dieser!</div></div>
+    <div class="ex gold-ex"><div class="de">Wie viel kostet <span class="c-gold">dieses</span> Kleid?</div><div class="en">How much does this dress cost?</div></div>
+    <div class="ex gold-ex"><div class="de">Ich nehme <span class="c-gold">diesen</span> Mantel.</div><div class="en">I'll take this coat. (Akkusativ → diesen)</div></div>
+    <div class="ex gold-ex"><div class="de">Gefällt dir <span class="c-gold">diese</span> Hose?</div><div class="en">Do you like these trousers?</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     IM GESCHÄFT PHRASES
+═════════════════════════════════════════ -->
+<div class="page" id="page-l13-shop-phrases">
+  <div class="page-title">
+    <div class="icon">🗣️</div>
+    <div><h2 class="c-gold">Im Geschäft — Shop Phrases</h2><p>Everything you need to have a real shopping conversation in German.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l13-shop-phrases')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I can ask for an item and its price</div><div class="rule-example">Was kostet das? · Haben Sie das in Größe 38?</div></div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-shop-phrases')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I can say if something fits or not, and express my preference</div><div class="rule-example">Das passt mir (nicht). · Das gefällt mir (nicht).</div></div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l13-shop-phrases')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I can complete a full shop dialogue using polite questions</div></div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">Key Phrases Table</div>
+    <div class="t-wrap"><table>
+      <tr><th>German</th><th>English</th></tr>
+      <tr><td>Was kostet das / das kostet…?</td><td>How much does that cost? / That costs…</td></tr>
+      <tr><td>Kann/Darf ich das anprobieren?</td><td>Can/May I try this on?</td></tr>
+      <tr><td>Das ist zu groß / klein / eng / weit.</td><td>That is too big / small / tight / loose.</td></tr>
+      <tr><td>Das passt mir (nicht).</td><td>That (doesn't) fit me.</td></tr>
+      <tr><td>Das gefällt mir (nicht).</td><td>I (don't) like that. [lit: that pleases me]</td></tr>
+      <tr><td>Ich nehme das / Ich kaufe das.</td><td>I'll take it / I'll buy it.</td></tr>
+      <tr><td>Haben Sie das in Größe 40?</td><td>Do you have this in size 40?</td></tr>
+      <tr><td>Haben Sie das auch in Blau/Rot?</td><td>Do you have this in blue/red too?</td></tr>
+      <tr><td>Wo ist die Kasse?</td><td>Where is the checkout?</td></tr>
+      <tr><td>Das ist im Angebot.</td><td>That is on sale / on offer.</td></tr>
+    </table></div>
+    <div class="note tip"><div class="note-icon">💡</div><div><strong>gefallen</strong> works backwards from English: <em>"Das gefällt <strong>mir</strong>"</em> = "That pleases <strong>me</strong>" → "I like that". The thing you like is the subject!</div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     LEKTION 14 — TRAVEL VOCAB
+═════════════════════════════════════════ -->
+<div class="page" id="page-l14-vocab">
+  <div class="page-title">
+    <div class="icon">✈️</div>
+    <div><h2 class="c-blue">Travel & Holiday Vocabulary</h2><p>Lektion 14 — Einmal um die Welt…</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l14-vocab')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I know transport words (Zug, Flugzeug, Schiff, Fahrrad, Bus, Auto)</div><div class="rule-example">train · airplane · ship · bicycle · bus · car</div></div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-vocab')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I know place/accommodation words (Hotel, Strand, Gebirge, Jugendherberge)</div><div class="rule-example">hotel · beach · mountains · youth hostel</div></div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-vocab')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I know time expressions for talking about the past</div><div class="rule-example">gestern · letzte Woche · letzten Sommer · vor zwei Tagen · im Urlaub</div></div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">🚂 Transport</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Zug</div><div class="v-en">train</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Bus</div><div class="v-en">bus</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Flug</div><div class="v-en">flight</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Flughafen</div><div class="v-en">airport</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Bahnhof</div><div class="v-en">train station</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Flugzeug</div><div class="v-en">airplane</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Schiff</div><div class="v-en">ship</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Fahrrad</div><div class="v-en">bicycle</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Auto</div><div class="v-en">car</div></div>
+    </div>
+
+    <div class="card-title c-blue" style="margin-top:18px">🏖️ Places & Accommodation</div>
+    <div class="vocab-grid">
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Reise</div><div class="v-en">journey / trip</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Urlaub</div><div class="v-en">holiday / vacation</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Strand</div><div class="v-en">beach</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Gebirge</div><div class="v-en">mountain range</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Berg</div><div class="v-en">mountain</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Meer</div><div class="v-en">sea</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">See</div><div class="v-en">lake</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Hotel</div><div class="v-en">hotel</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Jugendherberge</div><div class="v-en">youth hostel</div></div>
+      <div class="v-card"><div class="v-art n">das</div><div class="v-de">Zelt</div><div class="v-en">tent</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Koffer</div><div class="v-en">suitcase</div></div>
+      <div class="v-card"><div class="v-art m">der</div><div class="v-de">Pass</div><div class="v-en">passport</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Sehenswürdigkeit</div><div class="v-en">tourist attraction</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Abfahrt</div><div class="v-en">departure</div></div>
+      <div class="v-card"><div class="v-art f">die</div><div class="v-de">Ankunft</div><div class="v-en">arrival</div></div>
+    </div>
+
+    <h4 style="margin-top:18px; color:var(--muted); font-size:.8rem; text-transform:uppercase; letter-spacing:.06em">Time expressions (use with Perfekt)</h4>
+    <div class="pill-row">
+      <span class="pill">gestern — yesterday</span>
+      <span class="pill">vorgestern — the day before yesterday</span>
+      <span class="pill">letzte Woche — last week</span>
+      <span class="pill">letzten Sommer — last summer</span>
+      <span class="pill">letztes Jahr — last year</span>
+      <span class="pill">vor zwei Tagen — 2 days ago</span>
+      <span class="pill">am Wochenende — on the weekend</span>
+      <span class="pill">im Urlaub — on holiday</span>
+      <span class="pill">damals — back then</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PARTIZIP II
+═════════════════════════════════════════ -->
+<div class="page" id="page-l14-partizip">
+  <div class="page-title">
+    <div class="icon">🔧</div>
+    <div><h2 class="c-blue">Partizip II — Past Participle</h2><p>The second part of every Perfekt sentence. Three types to master.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l14-partizip')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Type 1 — Regular (Regelmäßig): <strong>ge- + stem + -t</strong></div>
+      <div class="rule-example">machen → gemacht · kaufen → gekauft · hören → gehört · fragen → gefragt</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-partizip')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Type 2 — Irregular (Unregelmäßig): <strong>ge- + changed stem + -en</strong></div>
+      <div class="rule-example">schreiben→geschrieben · finden→gefunden · nehmen→genommen · geben→gegeben</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-partizip')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Type 3 — Wormy (Separable): prefix + <strong>ge</strong> + stem + t/en</div>
+      <div class="rule-example">einkaufen→eingekauft · anrufen→angerufen · aufmachen→aufgemacht</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-partizip')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">-ieren verbs: NO ge-, just add <strong>-t</strong></div>
+      <div class="rule-example">fotografieren→fotografiert · reservieren→reserviert · telefonieren→telefoniert</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-partizip')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Inseparable prefix verbs (be-, er-, ver-, ge-): NO ge- added</div>
+      <div class="rule-example">besuchen→besucht · erzählen→erzählt · verstehen→verstanden</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">Type 1 — Regular <span class="tag tag-reg">Regelmäßig</span></div>
+    <div class="formula"><span class="c-teal">ge</span> + stem + <span class="c-green">t</span></div>
+    <div class="note tip"><div class="note-icon">💡</div><div>Think of it as a sandwich: <strong>ge-🍞</strong> + verb stem 🥪 + <strong>-t🍞</strong>. When the stem ends in -t or -d, add <strong>-et</strong> so it's pronounceable: warten → ge·wart·<strong>et</strong>.</div></div>
+    <div class="t-wrap"><table>
+      <tr><th>Infinitiv</th><th>Meaning</th><th>Partizip II</th></tr>
+      <tr><td>machen</td><td>to make/do</td><td class="cell-green">gemacht</td></tr>
+      <tr><td>kaufen</td><td>to buy</td><td class="cell-green">gekauft</td></tr>
+      <tr><td>zeigen</td><td>to show</td><td class="cell-green">gezeigt</td></tr>
+      <tr><td>zählen</td><td>to count</td><td class="cell-green">gezählt</td></tr>
+      <tr><td>warten</td><td>to wait</td><td class="cell-green">gewartet</td></tr>
+      <tr><td>fragen</td><td>to ask</td><td class="cell-green">gefragt</td></tr>
+      <tr><td>leben</td><td>to live</td><td class="cell-green">gelebt</td></tr>
+      <tr><td>hören</td><td>to hear/listen</td><td class="cell-green">gehört</td></tr>
+      <tr><td>spielen</td><td>to play</td><td class="cell-green">gespielt</td></tr>
+      <tr><td>lernen</td><td>to learn</td><td class="cell-green">gelernt</td></tr>
+      <tr><td>arbeiten</td><td>to work</td><td class="cell-green">gearbeitet</td></tr>
+      <tr><td>wohnen</td><td>to live (reside)</td><td class="cell-green">gewohnt</td></tr>
+      <tr><td>sagen</td><td>to say</td><td class="cell-green">gesagt</td></tr>
+      <tr><td>packen</td><td>to pack</td><td class="cell-green">gepackt</td></tr>
+    </table></div>
+  </div>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">Type 2 — Irregular <span class="tag tag-irr">Unregelmäßig</span></div>
+    <div class="formula"><span class="c-teal">ge</span> + <span class="c-gold">changed stem</span> + <span class="c-gold">en</span></div>
+    <div class="note warn"><div class="note-icon">⚠️</div><div>These must be memorised — the stem changes unpredictably, like English "write→written" or "find→found".</div></div>
+    <div class="t-wrap"><table>
+      <tr><th>Infinitiv</th><th>Meaning</th><th>Partizip II</th><th>Change</th></tr>
+      <tr><td>schreiben</td><td>to write</td><td class="cell-gold">geschrieben</td><td>ei→ie</td></tr>
+      <tr><td>finden</td><td>to find</td><td class="cell-gold">gefunden</td><td>i→u</td></tr>
+      <tr><td>geben</td><td>to give</td><td class="cell-gold">gegeben</td><td>e stays, -en ending</td></tr>
+      <tr><td>nehmen</td><td>to take</td><td class="cell-gold">genommen</td><td>nehm→nomm</td></tr>
+      <tr><td>fahren</td><td>to drive/travel</td><td class="cell-gold">gefahren</td><td>a stays, -en ending</td></tr>
+      <tr><td>sehen</td><td>to see</td><td class="cell-gold">gesehen</td><td>e stays, -en ending</td></tr>
+      <tr><td>essen</td><td>to eat</td><td class="cell-gold">gegessen</td><td>ess→gess</td></tr>
+      <tr><td>trinken</td><td>to drink</td><td class="cell-gold">getrunken</td><td>i→u</td></tr>
+      <tr><td>lesen</td><td>to read</td><td class="cell-gold">gelesen</td><td>e stays</td></tr>
+      <tr><td>sprechen</td><td>to speak</td><td class="cell-gold">gesprochen</td><td>e→o</td></tr>
+      <tr><td>gehen</td><td>to go</td><td class="cell-gold">gegangen</td><td>geh→gang</td></tr>
+      <tr><td>kommen</td><td>to come</td><td class="cell-gold">gekommen</td><td>komm stays, -en</td></tr>
+      <tr><td>fliegen</td><td>to fly</td><td class="cell-gold">geflogen</td><td>ie→o</td></tr>
+      <tr><td>schlafen</td><td>to sleep</td><td class="cell-gold">geschlafen</td><td>a stays</td></tr>
+    </table></div>
+  </div>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">Type 3 — Wormy (Separable) <span class="tag tag-worm">Trennbar</span></div>
+    <div class="formula">prefix + <span class="c-teal">ge</span> + stem + t/en</div>
+    <div class="note info"><div class="note-icon">🪱</div><div>The <strong>ge-</strong> worms its way in between the prefix and the stem. The prefix never leaves!</div></div>
+    <div class="t-wrap"><table>
+      <tr><th>Infinitiv</th><th>Meaning</th><th>Partizip II</th></tr>
+      <tr><td>einkaufen</td><td>to go shopping</td><td class="cell-teal">eingekauft</td></tr>
+      <tr><td>anrufen</td><td>to call (phone)</td><td class="cell-teal">angerufen</td></tr>
+      <tr><td>aufmachen</td><td>to open</td><td class="cell-teal">aufgemacht</td></tr>
+      <tr><td>aufräumen</td><td>to tidy up</td><td class="cell-teal">aufgeräumt</td></tr>
+      <tr><td>zuhören</td><td>to listen (to)</td><td class="cell-teal">zugehört</td></tr>
+      <tr><td>ankommen</td><td>to arrive</td><td class="cell-teal">angekommen</td></tr>
+      <tr><td>abfahren</td><td>to depart</td><td class="cell-teal">abgefahren</td></tr>
+      <tr><td>mitnehmen</td><td>to take along</td><td class="cell-teal">mitgenommen</td></tr>
+      <tr><td>anziehen</td><td>to put on (clothes)</td><td class="cell-teal">angezogen</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     DAS PERFEKT
+═════════════════════════════════════════ -->
+<div class="page" id="page-l14-perfekt">
+  <div class="page-title">
+    <div class="icon">⏮️</div>
+    <div><h2 class="c-blue">Das Perfekt — Conversational Past</h2><p>"I did / I have done" — how to talk about the past in German conversation.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l14-perfekt')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I know the two-part formula: <strong>haben/sein (pos.2)</strong> + <strong>Partizip II (end)</strong></div>
+      <div class="rule-example">Ich habe Pizza gegessen. · Wir sind nach Berlin gefahren.</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-perfekt')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Partizip II always goes to the very END of the sentence</div>
+      <div class="rule-example">Ich habe gestern in der Stadt viele Sachen <strong>gekauft</strong>.</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-perfekt')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">In questions, haben/sein moves to position 1</div>
+      <div class="rule-example"><strong>Hast</strong> du das gesehen? · <strong>Bist</strong> du nach Hause gegangen?</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">The Formula</div>
+    <div class="formula">Subject + <span class="c-blue">haben/sein</span> + (rest of sentence) + <span class="c-green">Partizip II</span></div>
+
+    <div class="two-col">
+      <div class="mini-panel">
+        <h4 class="c-blue">haben — most verbs</h4>
+        <div class="t-wrap"><table>
+          <tr><th>Person</th><th>Form</th></tr>
+          <tr><td>ich</td><td><strong>habe</strong> + PII</td></tr>
+          <tr><td>du</td><td><strong>hast</strong> + PII</td></tr>
+          <tr><td>er/sie/es</td><td><strong>hat</strong> + PII</td></tr>
+          <tr><td>wir</td><td><strong>haben</strong> + PII</td></tr>
+          <tr><td>ihr</td><td><strong>habt</strong> + PII</td></tr>
+          <tr><td>sie/Sie</td><td><strong>haben</strong> + PII</td></tr>
+        </table></div>
+      </div>
+      <div class="mini-panel">
+        <h4 class="c-purple">sein — movement verbs</h4>
+        <div class="t-wrap"><table>
+          <tr><th>Person</th><th>Form</th></tr>
+          <tr><td>ich</td><td><strong>bin</strong> + PII</td></tr>
+          <tr><td>du</td><td><strong>bist</strong> + PII</td></tr>
+          <tr><td>er/sie/es</td><td><strong>ist</strong> + PII</td></tr>
+          <tr><td>wir</td><td><strong>sind</strong> + PII</td></tr>
+          <tr><td>ihr</td><td><strong>seid</strong> + PII</td></tr>
+          <tr><td>sie/Sie</td><td><strong>sind</strong> + PII</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <h4 style="margin-top:14px; color:var(--muted); font-size:.8rem; letter-spacing:.06em; text-transform:uppercase">All 14 required verbs in Perfekt</h4>
+    <div class="t-wrap"><table>
+      <tr><th>Verb</th><th>Ich-form Perfekt</th><th>Helper</th></tr>
+      <tr><td>schreiben</td><td>ich habe <strong>geschrieben</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>machen</td><td>ich habe <strong>gemacht</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>kaufen</td><td>ich habe <strong>gekauft</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>zeigen</td><td>ich habe <strong>gezeigt</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>zählen</td><td>ich habe <strong>gezählt</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>warten</td><td>ich habe <strong>gewartet</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>finden</td><td>ich habe <strong>gefunden</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>suchen</td><td>ich habe <strong>gesucht</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>geben</td><td>ich habe <strong>gegeben</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>fragen</td><td>ich habe <strong>gefragt</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>nehmen</td><td>ich habe <strong>genommen</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>leben</td><td>ich habe <strong>gelebt</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>hören</td><td>ich habe <strong>gehört</strong></td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>fahren</td><td>ich <span class="c-purple">bin</span> <strong>gefahren</strong></td><td><span class="tag tag-sein">sein ⚠️</span></td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     HABEN VS SEIN
+═════════════════════════════════════════ -->
+<div class="page" id="page-l14-haben-sein">
+  <div class="page-title">
+    <div class="icon">🚶</div>
+    <div><h2 class="c-blue">haben vs sein — Which helper?</h2><p>The biggest decision in Perfekt: which helper verb do I use?</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l14-haben-sein')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I understand the movement test: draw arrows on a map → use <strong>sein</strong></div>
+      <div class="rule-detail">fahren, gehen, kommen, fliegen, laufen, schwimmen, reisen = movement from A to B</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-haben-sein')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Change of state also takes <strong>sein</strong></div>
+      <div class="rule-example">werden (become), aufwachen (wake up), einschlafen (fall asleep), sterben (die)</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-haben-sein')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Special sein-verbs: <strong>sein</strong> (to be) and <strong>bleiben</strong> (to stay) also use sein</div>
+      <div class="rule-example">Ich bin zu Hause <strong>gewesen</strong>. · Wir sind im Hotel <strong>geblieben</strong>.</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-haben-sein')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Everything else uses <strong>haben</strong></div>
+      <div class="rule-example">machen, kaufen, essen, schreiben, fragen, finden, hören, zeigen, zählen, warten, geben, nehmen, leben…</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">The Decision Chart</div>
+    <div class="two-col">
+      <div class="mini-panel" style="border-color:rgba(168,126,255,.3)">
+        <h4 class="c-purple">🚶 Use SEIN</h4>
+        <p style="font-size:.84rem; color:var(--muted); margin-bottom:8px">Movement from A → B, or change of state:</p>
+        <div style="font-size:.84rem; line-height:2">
+          fahren → <strong>gefahren</strong><br>
+          gehen → <strong>gegangen</strong><br>
+          kommen → <strong>gekommen</strong><br>
+          fliegen → <strong>geflogen</strong><br>
+          laufen → <strong>gelaufen</strong><br>
+          schwimmen → <strong>geschwommen</strong><br>
+          reisen → <strong>gereist</strong><br>
+          werden → <strong>geworden</strong><br>
+          bleiben → <strong>geblieben</strong><br>
+          sein → <strong>gewesen</strong>
+        </div>
+      </div>
+      <div class="mini-panel" style="border-color:rgba(91,143,255,.3)">
+        <h4 class="c-blue">✋ Use HABEN</h4>
+        <p style="font-size:.84rem; color:var(--muted); margin-bottom:8px">Everything else — actions, activities:</p>
+        <div style="font-size:.84rem; line-height:2">
+          machen → <strong>gemacht</strong><br>
+          kaufen → <strong>gekauft</strong><br>
+          essen → <strong>gegessen</strong><br>
+          trinken → <strong>getrunken</strong><br>
+          schreiben → <strong>geschrieben</strong><br>
+          hören → <strong>gehört</strong><br>
+          fragen → <strong>gefragt</strong><br>
+          finden → <strong>gefunden</strong><br>
+          sehen → <strong>gesehen</strong><br>
+          schlafen → <strong>geschlafen</strong>
+        </div>
+      </div>
+    </div>
+    <div class="note gold"><div class="note-icon">🗺️</div><div><strong>Memory trick:</strong> Close your eyes. Can you draw arrows on a map showing where the person moved? <strong>YES → sein. NO → haben.</strong></div></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     WORMY VERBS
+═════════════════════════════════════════ -->
+<div class="page" id="page-l14-wormy">
+  <div class="page-title">
+    <div class="icon">🪱</div>
+    <div><h2 class="c-blue">Wormy (Separable) Verbs</h2><p>Trennbare Verben — the ge- worms itself in between prefix and stem.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'l14-wormy')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">I can identify a separable verb by its prefix (an-, auf-, ein-, mit-, zu-, ab-…)</div>
+      <div class="rule-detail">These prefixes separate from the verb in Präsens: Ich kaufe ein. (einkaufen)</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-wormy')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">In Partizip II, ge- goes BETWEEN the prefix and the stem</div>
+      <div class="rule-example">ein + ge + kauf + t = eingekauft &nbsp;|&nbsp; an + ge + ruf + en = angerufen</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'l14-wormy')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">In Präsens, the prefix goes to the END of the sentence</div>
+      <div class="rule-example">Ich kaufe heute <strong>ein</strong>. · Er macht das Fenster <strong>auf</strong>.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">How Wormy Verbs Work</div>
+    <div class="note info"><div class="note-icon">🪱</div><div>Imagine the <strong>ge-</strong> is a worm that wriggles into the gap between prefix and verb stem. The prefix never leaves the verb — it just makes room for the worm.</div></div>
+
+    <div class="formula">ein + <span class="c-teal">ge</span> + kauf + t = <span class="c-gold">eingekauft</span></div>
+
+    <div class="t-wrap"><table>
+      <tr><th>Infinitiv</th><th>Meaning</th><th>Präsens (er)</th><th>Partizip II</th><th>Helper</th></tr>
+      <tr><td>einkaufen</td><td>to shop</td><td>kauft ein</td><td class="cell-teal">eingekauft</td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>anrufen</td><td>to phone</td><td>ruft an</td><td class="cell-teal">angerufen</td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>aufmachen</td><td>to open</td><td>macht auf</td><td class="cell-teal">aufgemacht</td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>aufräumen</td><td>to tidy</td><td>räumt auf</td><td class="cell-teal">aufgeräumt</td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>zuhören</td><td>to listen</td><td>hört zu</td><td class="cell-teal">zugehört</td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>ankommen</td><td>to arrive</td><td>kommt an</td><td class="cell-teal">angekommen</td><td><span class="tag tag-sein">sein</span></td></tr>
+      <tr><td>abfahren</td><td>to depart</td><td>fährt ab</td><td class="cell-teal">abgefahren</td><td><span class="tag tag-sein">sein</span></td></tr>
+      <tr><td>mitnehmen</td><td>to take along</td><td>nimmt mit</td><td class="cell-teal">mitgenommen</td><td><span class="tag tag-haben">haben</span></td></tr>
+      <tr><td>anziehen</td><td>to put on (clothes)</td><td>zieht an</td><td class="cell-teal">angezogen</td><td><span class="tag tag-haben">haben</span></td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PRÄSENS ENDINGS
+═════════════════════════════════════════ -->
+<div class="page" id="page-ref-praesens">
+  <div class="page-title">
+    <div class="icon">🕐</div>
+    <div><h2 class="c-green">Präsens — Present Tense</h2><p>Grammar reference — how to conjugate verbs in the present tense.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'ref-praesens')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Regular endings: ich=-e, du=-st, er/sie/es=-t, wir=-en, ihr=-t, sie/Sie=-en</div>
+      <div class="rule-example">machen: ich mache · du machst · er macht · wir machen · ihr macht · sie machen</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'ref-praesens')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">Some irregular verbs change their vowel in du and er/sie/es forms (e→i or e→ie)</div>
+      <div class="rule-example">geben: du gibst, er gibt &nbsp;|&nbsp; sehen: du siehst, er sieht &nbsp;|&nbsp; nehmen: du nimmst, er nimmt</div>
+    </div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'ref-praesens')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content">
+      <div class="rule">sein and haben are completely irregular — must memorise both</div>
+      <div class="rule-example">sein: bin/bist/ist/sind/seid/sind &nbsp;|&nbsp; haben: habe/hast/hat/haben/habt/haben</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card green-card">
+    <div class="card-title c-green">Regular Endings</div>
+    <div class="formula">Remove <span class="c-red">-en</span> → stem → add ending</div>
+    <div class="t-wrap"><table>
+      <tr><th>Person</th><th>Ending</th><th>machen</th><th>kaufen</th><th>hören</th></tr>
+      <tr><td><strong>ich</strong></td><td class="cell-green">-e</td><td>mach<strong>e</strong></td><td>kauf<strong>e</strong></td><td>hör<strong>e</strong></td></tr>
+      <tr><td><strong>du</strong></td><td class="cell-green">-st</td><td>mach<strong>st</strong></td><td>kauf<strong>st</strong></td><td>hör<strong>st</strong></td></tr>
+      <tr><td><strong>er/sie/es</strong></td><td class="cell-green">-t</td><td>mach<strong>t</strong></td><td>kauf<strong>t</strong></td><td>hör<strong>t</strong></td></tr>
+      <tr><td><strong>wir</strong></td><td class="cell-green">-en</td><td>mach<strong>en</strong></td><td>kauf<strong>en</strong></td><td>hör<strong>en</strong></td></tr>
+      <tr><td><strong>ihr</strong></td><td class="cell-green">-t</td><td>mach<strong>t</strong></td><td>kauf<strong>t</strong></td><td>hör<strong>t</strong></td></tr>
+      <tr><td><strong>sie/Sie</strong></td><td class="cell-green">-en</td><td>mach<strong>en</strong></td><td>kauf<strong>en</strong></td><td>hör<strong>en</strong></td></tr>
+    </table></div>
+    <div class="note tip"><div class="note-icon">🎵</div><div>Chant the endings: <strong>E – ST – T – EN – T – EN</strong>. Wir and sie/Sie always match the infinitive!</div></div>
+  </div>
+
+  <div class="topic-card green-card">
+    <div class="card-title c-green">Irregular Stem Changes (e→i / e→ie / a→ä)</div>
+    <div class="note warn"><div class="note-icon">⚠️</div><div>Only the <strong>du</strong> and <strong>er/sie/es</strong> forms change — ich, wir, ihr, sie stay regular.</div></div>
+    <div class="t-wrap"><table>
+      <tr><th>Verb</th><th>ich</th><th>du (changes!)</th><th>er/sie/es (changes!)</th><th>wir</th></tr>
+      <tr><td>geben (e→i)</td><td>gebe</td><td class="cell-gold">gibst</td><td class="cell-gold">gibt</td><td>geben</td></tr>
+      <tr><td>nehmen (e→i)</td><td>nehme</td><td class="cell-gold">nimmst</td><td class="cell-gold">nimmt</td><td>nehmen</td></tr>
+      <tr><td>sehen (e→ie)</td><td>sehe</td><td class="cell-gold">siehst</td><td class="cell-gold">sieht</td><td>sehen</td></tr>
+      <tr><td>lesen (e→ie)</td><td>lese</td><td class="cell-gold">liest</td><td class="cell-gold">liest</td><td>lesen</td></tr>
+      <tr><td>sprechen (e→i)</td><td>spreche</td><td class="cell-gold">sprichst</td><td class="cell-gold">spricht</td><td>sprechen</td></tr>
+      <tr><td>essen (e→i)</td><td>esse</td><td class="cell-gold">isst</td><td class="cell-gold">isst</td><td>essen</td></tr>
+      <tr><td>fahren (a→ä)</td><td>fahre</td><td class="cell-gold">fährst</td><td class="cell-gold">fährt</td><td>fahren</td></tr>
+      <tr><td>schlafen (a→ä)</td><td>schlafe</td><td class="cell-gold">schläfst</td><td class="cell-gold">schläft</td><td>schlafen</td></tr>
+    </table></div>
+  </div>
+
+  <div class="topic-card green-card">
+    <div class="card-title c-green">sein & haben — Must Memorise!</div>
+    <div class="two-col">
+      <div class="mini-panel">
+        <h4 class="c-green">sein (to be)</h4>
+        <div class="t-wrap"><table>
+          <tr><td>ich</td><td class="cell-red">bin</td></tr>
+          <tr><td>du</td><td class="cell-red">bist</td></tr>
+          <tr><td>er/sie/es</td><td class="cell-red">ist</td></tr>
+          <tr><td>wir</td><td class="cell-red">sind</td></tr>
+          <tr><td>ihr</td><td class="cell-red">seid</td></tr>
+          <tr><td>sie/Sie</td><td class="cell-red">sind</td></tr>
+        </table></div>
+      </div>
+      <div class="mini-panel">
+        <h4 class="c-green">haben (to have)</h4>
+        <div class="t-wrap"><table>
+          <tr><td>ich</td><td class="cell-red">habe</td></tr>
+          <tr><td>du</td><td class="cell-red">hast</td></tr>
+          <tr><td>er/sie/es</td><td class="cell-red">hat</td></tr>
+          <tr><td>wir</td><td class="cell-red">haben</td></tr>
+          <tr><td>ihr</td><td class="cell-red">habt</td></tr>
+          <tr><td>sie/Sie</td><td class="cell-red">haben</td></tr>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     ALL VERBS + MEANINGS
+═════════════════════════════════════════ -->
+<div class="page" id="page-ref-verbs">
+  <div class="page-title">
+    <div class="icon">📚</div>
+    <div><h2 class="c-green">All Verbs — Meanings & Partizip II</h2><p>Your required 14 verbs plus important basics. Colour = type.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'ref-verbs')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I know the meaning of all 14 required verbs</div></div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'ref-verbs')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I can say the Partizip II of all 14 required verbs without looking</div></div>
+  </div>
+  <div class="tick-row" onclick="tick(this,'ref-verbs')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I know which type each verb is (regular / irregular / wormy)</div></div>
+  </div>
+
+  <hr>
+
+  <div class="pill-row" style="margin-bottom:16px">
+    <span class="pill" style="background:var(--green-bg); color:var(--green)">🟢 Regular</span>
+    <span class="pill" style="background:var(--gold-bg); color:var(--gold)">🟡 Irregular</span>
+    <span class="pill" style="background:var(--teal-bg); color:var(--teal)">🔵 Wormy/Separable</span>
+    <span class="pill" style="background:var(--purple-bg); color:var(--purple)">🟣 + sein</span>
+  </div>
+
+  <div class="topic-card green-card">
+    <div class="card-title c-green">Your 14 Required Verbs</div>
+    <div class="t-wrap"><table>
+      <tr><th>Verb</th><th>Meaning</th><th>Type</th><th>Partizip II</th><th>Perfekt (ich)</th></tr>
+      <tr><td>schreiben</td><td>to write</td><td><span class="tag tag-irr">Irregular</span></td><td class="cell-gold">geschrieben</td><td>ich habe geschrieben</td></tr>
+      <tr><td>machen</td><td>to make / do</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gemacht</td><td>ich habe gemacht</td></tr>
+      <tr><td>kaufen</td><td>to buy</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gekauft</td><td>ich habe gekauft</td></tr>
+      <tr><td>zeigen</td><td>to show</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gezeigt</td><td>ich habe gezeigt</td></tr>
+      <tr><td>zählen</td><td>to count</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gezählt</td><td>ich habe gezählt</td></tr>
+      <tr><td>warten</td><td>to wait</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gewartet</td><td>ich habe gewartet</td></tr>
+      <tr><td>finden</td><td>to find</td><td><span class="tag tag-irr">Irregular</span></td><td class="cell-gold">gefunden</td><td>ich habe gefunden</td></tr>
+      <tr><td>suchen</td><td>to search / look for</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gesucht</td><td>ich habe gesucht</td></tr>
+      <tr><td>geben</td><td>to give</td><td><span class="tag tag-irr">Irregular</span></td><td class="cell-gold">gegeben</td><td>ich habe gegeben</td></tr>
+      <tr><td>fragen</td><td>to ask</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gefragt</td><td>ich habe gefragt</td></tr>
+      <tr><td>nehmen</td><td>to take</td><td><span class="tag tag-irr">Irregular</span></td><td class="cell-gold">genommen</td><td>ich habe genommen</td></tr>
+      <tr><td>leben</td><td>to live</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gelebt</td><td>ich habe gelebt</td></tr>
+      <tr><td>hören</td><td>to hear / listen</td><td><span class="tag tag-reg">Regular</span></td><td class="cell-green">gehört</td><td>ich habe gehört</td></tr>
+      <tr><td>fahren</td><td>to drive / travel</td><td><span class="tag tag-irr">Irregular</span></td><td class="cell-gold" style="color:var(--purple)">gefahren</td><td>ich <span class="c-purple">bin</span> gefahren ⚠️</td></tr>
+    </table></div>
+  </div>
+
+  <div class="topic-card green-card">
+    <div class="card-title c-green">Essential Basic Verbs</div>
+    <div class="t-wrap"><table>
+      <tr><th>Verb</th><th>Meaning</th><th>Partizip II</th></tr>
+      <tr><td>sein</td><td>to be</td><td class="cell-gold">gewesen (+ sein)</td></tr>
+      <tr><td>haben</td><td>to have</td><td class="cell-green">gehabt</td></tr>
+      <tr><td>gehen</td><td>to go</td><td class="cell-gold" style="color:var(--purple)">gegangen (+ sein)</td></tr>
+      <tr><td>kommen</td><td>to come</td><td class="cell-gold" style="color:var(--purple)">gekommen (+ sein)</td></tr>
+      <tr><td>essen</td><td>to eat</td><td class="cell-gold">gegessen</td></tr>
+      <tr><td>trinken</td><td>to drink</td><td class="cell-gold">getrunken</td></tr>
+      <tr><td>sehen</td><td>to see</td><td class="cell-gold">gesehen</td></tr>
+      <tr><td>lesen</td><td>to read</td><td class="cell-gold">gelesen</td></tr>
+      <tr><td>sprechen</td><td>to speak</td><td class="cell-gold">gesprochen</td></tr>
+      <tr><td>schlafen</td><td>to sleep</td><td class="cell-gold">geschlafen</td></tr>
+      <tr><td>fliegen</td><td>to fly</td><td class="cell-gold" style="color:var(--purple)">geflogen (+ sein)</td></tr>
+      <tr><td>können</td><td>can / to be able to</td><td class="cell-green">gekonnt</td></tr>
+      <tr><td>müssen</td><td>must / to have to</td><td class="cell-green">gemusst</td></tr>
+      <tr><td>wollen</td><td>to want to</td><td class="cell-green">gewollt</td></tr>
+      <tr><td>möchten</td><td>would like to</td><td>—</td></tr>
+      <tr><td>dürfen</td><td>may / allowed to</td><td class="cell-green">gedurft</td></tr>
+      <tr><td>spielen</td><td>to play</td><td class="cell-green">gespielt</td></tr>
+      <tr><td>lernen</td><td>to learn / study</td><td class="cell-green">gelernt</td></tr>
+      <tr><td>arbeiten</td><td>to work</td><td class="cell-green">gearbeitet</td></tr>
+      <tr><td>wohnen</td><td>to live (reside)</td><td class="cell-green">gewohnt</td></tr>
+      <tr><td>verstehen</td><td>to understand</td><td class="cell-gold">verstanden</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     EXERCISE — COMPARISONS
+═════════════════════════════════════════ -->
+<div class="page" id="page-ex-komparativ">
+  <div class="page-title">
+    <div class="icon">✏️</div>
+    <div><h2 class="c-gold">Übungen — Comparisons</h2><p>Practice Komparativ, Superlativ, and comparison sentences.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'ex-komparativ')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I have completed all comparison exercises and checked my answers</div></div>
+  </div>
+
+  <hr>
+
+  <!-- Q1 -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">1</div>
+      <div><div class="q-title">Komparativ — fill in the blanks</div><div class="q-inst">Write the correct Komparativ form of the word in brackets.</div></div>
+    </div>
+    <div class="q-line">a) Der Mantel ist _____________ als die Jacke. (teuer)</div>
+    <div class="q-line">b) Mein Bruder ist _____________ als ich. (jung)</div>
+    <div class="q-line">c) Diese Schuhe sind _____________ als jene. (bequem)</div>
+    <div class="q-line">d) Das Kaufhaus ist _____________ als der kleine Laden. (groß)</div>
+    <div class="q-line">e) Schwimmen ist _____________ als Laufen. (gut)</div>
+    <div class="q-line">f) Im Winter ist es _____________ als im Herbst. (kalt)</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('r1')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="r1">
+      a) <strong>teurer</strong> &nbsp;·&nbsp; b) <strong>jünger</strong> &nbsp;·&nbsp; c) <strong>bequemer</strong> &nbsp;·&nbsp; d) <strong>größer</strong> &nbsp;·&nbsp; e) <strong>besser</strong> (irregular!) &nbsp;·&nbsp; f) <strong>kälter</strong>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">2</div>
+      <div><div class="q-title">Superlativ — complete each sentence</div><div class="q-inst">Use am + adjective + sten/esten.</div></div>
+    </div>
+    <div class="q-line">a) Diese Jacke kostet 500€ — sie ist _____________. (teuer)</div>
+    <div class="q-line">b) Lena läuft schneller als alle — sie ist _____________. (schnell)</div>
+    <div class="q-line">c) Ich esse Pasta lieber als alles andere — Pasta esse ich _____________. (gern)</div>
+    <div class="q-line">d) Dezember ist der _____________ Monat. (kalt)</div>
+    <div class="q-line">e) Das ist wirklich der _____________ Film! (gut)</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('r2')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="r2">
+      a) <strong>am teuersten</strong> &nbsp;·&nbsp; b) <strong>am schnellsten</strong> &nbsp;·&nbsp; c) <strong>am liebsten</strong> &nbsp;·&nbsp; d) <strong>kälteste</strong> (before noun — no "am") &nbsp;·&nbsp; e) <strong>beste</strong> (before noun)
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">3</div>
+      <div><div class="q-title">so…wie oder …er als?</div><div class="q-inst">Decide which comparison structure to use, then fill in the blank.</div></div>
+    </div>
+    <div class="q-line">a) Der Pullover kostet 40€. Die Jacke kostet auch 40€.<br>→ Der Pullover ist _______ _______ die Jacke. (teuer — equal)</div>
+    <div class="q-line">b) Tom ist 1,80m. Lisa ist 1,65m.<br>→ Tom ist _______ Lisa. (groß — unequal)</div>
+    <div class="q-line">c) Das T-Shirt ist modern. Der Pullover ist auch modern.<br>→ Das T-Shirt ist _______ modern _______ der Pullover. (equal)</div>
+    <div class="q-line">d) Laufen ist gut. Schwimmen ist besser.<br>→ Schwimmen ist _______ Laufen. (gut — unequal)</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('r3')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="r3">
+      a) <strong>so teuer wie</strong> &nbsp;·&nbsp; b) <strong>größer als</strong> &nbsp;·&nbsp; c) <strong>so … wie</strong> &nbsp;·&nbsp; d) <strong>besser als</strong>
+    </div>
+  </div>
+
+  <!-- Q4 Polite -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">4</div>
+      <div><div class="q-title">Make it polite — Höfliche Fragen</div><div class="q-inst">Rewrite each sentence using Konjunktiv II (könnte/würde/möchte/dürfte/hätte).</div></div>
+    </div>
+    <div class="q-line">a) Können Sie mir helfen? → _________________________________</div>
+    <div class="q-line">b) Ich will diesen Pullover in Größe 40. → _________________________________</div>
+    <div class="q-line">c) Haben Sie das in Grün? → _________________________________</div>
+    <div class="q-line">d) Darf ich das anprobieren? → _________________________________ (very polite)</div>
+    <div class="q-line">e) Können Sie das wiederholen? → _________________________________</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('r4')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="r4">
+      a) <strong>Könnten Sie mir (bitte) helfen?</strong><br>
+      b) <strong>Ich möchte bitte diesen Pullover in Größe 40.</strong><br>
+      c) <strong>Hätten Sie das auch in Grün?</strong><br>
+      d) <strong>Dürfte ich das anprobieren?</strong><br>
+      e) <strong>Könnten / Würden Sie das (bitte) wiederholen?</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     EXERCISE — PERFEKT
+═════════════════════════════════════════ -->
+<div class="page" id="page-ex-perfekt">
+  <div class="page-title">
+    <div class="icon">✏️</div>
+    <div><h2 class="c-blue">Übungen — Perfekt Tense</h2><p>Practice haben/sein, Partizip II, and building past tense sentences.</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'ex-perfekt')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I have completed all Perfekt exercises and checked my answers</div></div>
+  </div>
+
+  <hr>
+
+  <!-- Q1 haben or sein -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">1</div>
+      <div><div class="q-title">haben oder sein?</div><div class="q-inst">Fill in the correct form of haben or sein.</div></div>
+    </div>
+    <div class="q-line">a) Lena _______ nach Berlin gefahren.</div>
+    <div class="q-line">b) Wir _______ ein leckeres Essen gekocht.</div>
+    <div class="q-line">c) Die Kinder _______ im Meer geschwommen.</div>
+    <div class="q-line">d) Ich _______ viele Fotos gemacht.</div>
+    <div class="q-line">e) Er _______ mit dem Flugzeug nach Paris geflogen.</div>
+    <div class="q-line">f) Sie (pl.) _______ im Hotel geblieben.</div>
+    <div class="q-line">g) Du _______ gestern sehr lange geschlafen.</div>
+    <div class="q-line">h) Wir _______ letztes Jahr nach Spanien gereist.</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('rp1')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="rp1">
+      a) <strong>ist</strong> (fahren = movement) &nbsp;·&nbsp; b) <strong>haben</strong> (kochen = no movement) &nbsp;·&nbsp; c) <strong>sind</strong> (schwimmen = movement) &nbsp;·&nbsp; d) <strong>habe</strong> &nbsp;·&nbsp; e) <strong>ist</strong> (fliegen = movement) &nbsp;·&nbsp; f) <strong>sind</strong> (bleiben = change of state) &nbsp;·&nbsp; g) <strong>hast</strong> (schlafen = no movement) &nbsp;·&nbsp; h) <strong>sind</strong> (reisen = movement)
+    </div>
+  </div>
+
+  <!-- Q2 Partizip II -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">2</div>
+      <div><div class="q-title">Partizip II bilden — form the past participle</div><div class="q-inst">Write the Partizip II for each verb. Pay attention to the type!</div></div>
+    </div>
+    <div class="t-wrap"><table>
+      <tr><th>Infinitiv</th><th>Type</th><th>Your Partizip II</th><th></th></tr>
+      <tr><td>kaufen</td><td>regular</td><td>_______________</td><td></td></tr>
+      <tr><td>schreiben</td><td>irregular</td><td>_______________</td><td></td></tr>
+      <tr><td>fahren</td><td>irregular</td><td>_______________</td><td></td></tr>
+      <tr><td>einkaufen</td><td>wormy</td><td>_______________</td><td></td></tr>
+      <tr><td>besuchen</td><td>insep. prefix</td><td>_______________</td><td></td></tr>
+      <tr><td>finden</td><td>irregular</td><td>_______________</td><td></td></tr>
+      <tr><td>fotografieren</td><td>-ieren verb</td><td>_______________</td><td></td></tr>
+      <tr><td>ankommen</td><td>wormy</td><td>_______________</td><td></td></tr>
+      <tr><td>nehmen</td><td>irregular</td><td>_______________</td><td></td></tr>
+      <tr><td>aufräumen</td><td>wormy</td><td>_______________</td><td></td></tr>
+    </table></div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('rp2')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="rp2">
+      kaufen → <strong>gekauft</strong> &nbsp;·&nbsp; schreiben → <strong>geschrieben</strong> &nbsp;·&nbsp; fahren → <strong>gefahren</strong> &nbsp;·&nbsp; einkaufen → <strong>eingekauft</strong> &nbsp;·&nbsp; besuchen → <strong>besucht</strong> (no ge-!) &nbsp;·&nbsp; finden → <strong>gefunden</strong> &nbsp;·&nbsp; fotografieren → <strong>fotografiert</strong> (no ge-!) &nbsp;·&nbsp; ankommen → <strong>angekommen</strong> &nbsp;·&nbsp; nehmen → <strong>genommen</strong> &nbsp;·&nbsp; aufräumen → <strong>aufgeräumt</strong>
+    </div>
+  </div>
+
+  <!-- Q3 Build sentences -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">3</div>
+      <div><div class="q-title">Sätze bauen — build Perfekt sentences</div><div class="q-inst">Put the words in the right order. Helper verb = position 2. Partizip II = at the END.</div></div>
+    </div>
+    <div class="q-line">a) ich / gestern / in der Stadt / viel / einkaufen<br>→ _______________________________________________</div>
+    <div class="q-line">b) wir / letzten Sommer / nach Österreich / fahren<br>→ _______________________________________________</div>
+    <div class="q-line">c) er / im Urlaub / viele Fotos / machen<br>→ _______________________________________________</div>
+    <div class="q-line">d) du / am Wochenende / ins Kino / gehen? (question)<br>→ _______________________________________________</div>
+    <div class="q-line">e) Lena / letztes Jahr / sehr viel / lernen<br>→ _______________________________________________</div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('rp3')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="rp3">
+      a) <strong>Ich habe gestern in der Stadt viel eingekauft.</strong><br>
+      b) <strong>Wir sind letzten Sommer nach Österreich gefahren.</strong><br>
+      c) <strong>Er hat im Urlaub viele Fotos gemacht.</strong><br>
+      d) <strong>Bist du am Wochenende ins Kino gegangen?</strong><br>
+      e) <strong>Lena hat letztes Jahr sehr viel gelernt.</strong>
+    </div>
+  </div>
+
+  <!-- Q4 Story -->
+  <div class="quiz-wrap">
+    <div class="quiz-label">
+      <div class="q-num">4</div>
+      <div><div class="q-title">Urlaubsgeschichte — complete the story</div><div class="q-inst">Fill in the correct Perfekt forms. Choose haben or sein AND write the Partizip II.</div></div>
+    </div>
+    <p style="background:var(--panel); padding:16px; border-radius:8px; font-size:.9rem; line-height:2.2; margin-bottom:12px">
+      Letzten Sommer _______ ich nach Italien _______. <em>(fahren)</em><br>
+      Ich _______ mit dem Zug _______. <em>(reisen)</em><br>
+      In Rom _______ ich das Kolosseum _______. <em>(besuchen)</em><br>
+      Ich _______ viele Fotos _______. <em>(machen)</em><br>
+      Abends _______ wir Pizza und Pasta _______. <em>(essen)</em><br>
+      Am dritten Tag _______ ich auch noch an den Strand _______. <em>(gehen)</em><br>
+      Es _______ wirklich toll _______! <em>(sein)</em>
+    </p>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="toggleReveal('rp4')">Show Answers</button>
+    </div>
+    <div class="ans-reveal" id="rp4">
+      <strong>bin</strong> … <strong>gefahren</strong> (sein + movement)<br>
+      <strong>bin</strong> … <strong>gereist</strong> (sein + movement)<br>
+      <strong>habe</strong> … <strong>besucht</strong> (haben; besuchen = insep. prefix, no ge-)<br>
+      <strong>habe</strong> … <strong>gemacht</strong><br>
+      <strong>haben</strong> … <strong>gegessen</strong><br>
+      <strong>bin</strong> … <strong>gegangen</strong> (sein + movement)<br>
+      <strong>ist</strong> … <strong>gewesen</strong> (sein; sein uses sein!)
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     VOCAB MATCH GAME
+═════════════════════════════════════════ -->
+<div class="page" id="page-ex-vocab">
+  <div class="page-title">
+    <div class="icon">🎮</div>
+    <div><h2 class="c-gold">Vocabulary Match Game</h2><p>Click a German word then its English match. Beat both rounds!</p></div>
+  </div>
+
+  <div class="tick-row" onclick="tick(this,'ex-vocab')">
+    <div class="tick-box">✓</div>
+    <div class="tick-content"><div class="rule">I completed the match game and got all pairs correct</div></div>
+  </div>
+
+  <hr>
+
+  <div class="topic-card gold-card">
+    <div class="card-title c-gold">Round 1 — Clothing & Shop</div>
+    <div class="match-score" id="ms1">Score: 0 / 5</div>
+    <div class="match-area" id="mg1">
+      <div class="m-tile" data-id="1" data-side="de" onclick="match(this,'mg1','ms1',5)">der Pullover</div>
+      <div class="m-tile" data-id="3" data-side="en" onclick="match(this,'mg1','ms1',5)">checkout</div>
+      <div class="m-tile" data-id="2" data-side="de" onclick="match(this,'mg1','ms1',5)">das Kleid</div>
+      <div class="m-tile" data-id="1" data-side="en" onclick="match(this,'mg1','ms1',5)">pullover / sweater</div>
+      <div class="m-tile" data-id="3" data-side="de" onclick="match(this,'mg1','ms1',5)">die Kasse</div>
+      <div class="m-tile" data-id="4" data-side="en" onclick="match(this,'mg1','ms1',5)">discount</div>
+      <div class="m-tile" data-id="4" data-side="de" onclick="match(this,'mg1','ms1',5)">der Rabatt</div>
+      <div class="m-tile" data-id="5" data-side="en" onclick="match(this,'mg1','ms1',5)">fitting room</div>
+      <div class="m-tile" data-id="5" data-side="de" onclick="match(this,'mg1','ms1',5)">die Umkleidekabine</div>
+      <div class="m-tile" data-id="2" data-side="en" onclick="match(this,'mg1','ms1',5)">dress</div>
+    </div>
+  </div>
+
+  <div class="topic-card blue-card">
+    <div class="card-title c-blue">Round 2 — Travel Vocab</div>
+    <div class="match-score" id="ms2">Score: 0 / 5</div>
+    <div class="match-area" id="mg2">
+      <div class="m-tile" data-id="A" data-side="de" onclick="match(this,'mg2','ms2',5)">der Koffer</div>
+      <div class="m-tile" data-id="C" data-side="en" onclick="match(this,'mg2','ms2',5)">airport</div>
+      <div class="m-tile" data-id="B" data-side="de" onclick="match(this,'mg2','ms2',5)">der Strand</div>
+      <div class="m-tile" data-id="A" data-side="en" onclick="match(this,'mg2','ms2',5)">suitcase</div>
+      <div class="m-tile" data-id="C" data-side="de" onclick="match(this,'mg2','ms2',5)">der Flughafen</div>
+      <div class="m-tile" data-id="D" data-side="en" onclick="match(this,'mg2','ms2',5)">youth hostel</div>
+      <div class="m-tile" data-id="D" data-side="de" onclick="match(this,'mg2','ms2',5)">die Jugendherberge</div>
+      <div class="m-tile" data-id="E" data-side="en" onclick="match(this,'mg2','ms2',5)">passport</div>
+      <div class="m-tile" data-id="E" data-side="de" onclick="match(this,'mg2','ms2',5)">der Pass</div>
+      <div class="m-tile" data-id="B" data-side="en" onclick="match(this,'mg2','ms2',5)">beach</div>
+    </div>
+  </div>
+
+  <div class="topic-card green-card">
+    <div class="card-title c-green">Round 3 — Partizip II Flash</div>
+    <div class="match-score" id="ms3">Score: 0 / 5</div>
+    <div class="match-area" id="mg3">
+      <div class="m-tile" data-id="i" data-side="de" onclick="match(this,'mg3','ms3',5)">schreiben</div>
+      <div class="m-tile" data-id="iii" data-side="en" onclick="match(this,'mg3','ms3',5)">genommen</div>
+      <div class="m-tile" data-id="ii" data-side="de" onclick="match(this,'mg3','ms3',5)">einkaufen</div>
+      <div class="m-tile" data-id="i" data-side="en" onclick="match(this,'mg3','ms3',5)">geschrieben</div>
+      <div class="m-tile" data-id="iii" data-side="de" onclick="match(this,'mg3','ms3',5)">nehmen</div>
+      <div class="m-tile" data-id="iv" data-side="en" onclick="match(this,'mg3','ms3',5)">gefahren</div>
+      <div class="m-tile" data-id="iv" data-side="de" onclick="match(this,'mg3','ms3',5)">fahren</div>
+      <div class="m-tile" data-id="v" data-side="en" onclick="match(this,'mg3','ms3',5)">gemacht</div>
+      <div class="m-tile" data-id="v" data-side="de" onclick="match(this,'mg3','ms3',5)">machen</div>
+      <div class="m-tile" data-id="ii" data-side="en" onclick="match(this,'mg3','ms3',5)">eingekauft</div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ── NAVIGATION ──────────────────────────────────
+function go(el) {
+  const pageId = el.dataset.page;
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── TICK SYSTEM ──────────────────────────────────
+const tickState = {};     // { pageKey: { total, ticked } }
+const pageTicks = {};     // page -> [tick elements]
+
+function tick(el, pageKey) {
+  el.classList.toggle('ticked');
+  updateProgress();
+  updateDot(pageKey);
+}
+
+function updateDot(key) {
+  const rows = document.querySelectorAll(`[onclick*="tick(this,'${key}')"]`);
+  const total = rows.length;
+  const done  = [...rows].filter(r => r.classList.contains('ticked')).length;
+  const dot = document.getElementById('dot-' + key);
+  if (dot) dot.classList.toggle('done', done === total && total > 0);
+}
+
+function updateProgress() {
+  const all   = document.querySelectorAll('.tick-row');
+  const ticked = document.querySelectorAll('.tick-row.ticked');
+  const pct = all.length ? Math.round((ticked.length / all.length) * 100) : 0;
+  document.getElementById('bar-fill').style.width = pct + '%';
+  document.getElementById('pct-label').textContent = ticked.length + ' / ' + all.length + ' topics';
+}
+
+// init progress
+updateProgress();
+
+// ── ANSWER REVEAL ───────────────────────────────
+function toggleReveal(id) {
+  const box = document.getElementById(id);
+  const wasHidden = box.style.display !== 'block';
+  box.style.display = wasHidden ? 'block' : 'none';
+  const btn = box.previousElementSibling?.previousElementSibling || box.previousElementSibling;
+}
+
+// ── MATCH GAME ──────────────────────────────────
+const matchState = {};
+
+function match(el, gridId, scoreId, total) {
+  if (el.classList.contains('right')) return;
+
+  const gs = matchState[gridId] || (matchState[gridId] = { sel: null, score: 0 });
+  const id = el.dataset.id, side = el.dataset.side;
+
+  if (!gs.sel) {
+    el.classList.add('sel');
+    gs.sel = el;
+    return;
+  }
+
+  const prev = gs.sel;
+  const sameId   = prev.dataset.id   === id;
+  const diffSide = prev.dataset.side !== side;
+
+  if (sameId && diffSide) {
+    // correct
+    [el, prev].forEach(t => { t.classList.remove('sel'); t.classList.add('right'); });
+    gs.score++;
+    gs.sel = null;
+    document.getElementById(scoreId).textContent = `Score: ${gs.score} / ${total}`;
+  } else {
+    // wrong
+    el.classList.add('wrong');
+    prev.classList.add('wrong');
+    setTimeout(() => {
+      [el, prev].forEach(t => t.classList.remove('sel','wrong'));
+    }, 500);
+    gs.sel = null;
+  }
+}
+
+// ── SCROLL TOP ──────────────────────────────────
+const scrollBtn = document.getElementById('scroll-top');
+document.querySelector('.content').addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('show', window.scrollY > 300);
+});
+window.addEventListener('scroll', () => {
+  scrollBtn.classList.toggle('show', window.scrollY > 300);
+});
+</script>
+</body>
+</html>
